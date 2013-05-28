@@ -21,24 +21,43 @@ limitations under the License.
 <body>
 <%
     String s = "-"; // Just declare a string
-    try {
-        // This creates a context, it can be used to lookup EJBs. Using normal RMI you would
-        // have to know port number and stuff. The InitialContext holds info like
-        // server names, ports and stuff I guess.
+
+	try {
+        // This creates a context, it can be used to lookup EJBs. 
         Context context = new InitialContext();
-        // MyTimeLocalHome is a reference to the EJB
+        // MyTimeLocalHome is a reference to the EJB.
         MyTimeLocal myTimeLocal = (MyTimeLocal) context.lookup("java:comp/env/ejb/MyTimeBean");
-        // So, just go ahead and call a method (in this case the only method).
+        // So, just go ahead and call a method (in this case the only public method).
         s = myTimeLocal.getTime();
     }
     catch (Exception e) {
         s = e.toString();
     }
+
+    String private_s = "-";  //Another time string, to be used for the protected call.	
+
+    try {
+        // Call the private method.
+        // This creates *another* context. 
+        // Not efficient, but we are focused on isolating the security, not page load speed.  
+        Context context = new InitialContext();
+        // MyTimeLocalHome is a reference to the EJB
+        MyTimeLocal myTimeLocal = (MyTimeLocal) context.lookup("java:comp/env/ejb/MyTimeBean");
+        // So, just go ahead and call a method (in this case the only public method).
+
+        private_s = myTimeLocal.getTimePrivate(); // throw exception if caller is not authorized
+    }
+    catch (Exception e) {
+        private_s = e.toString();
+    }
+
 %>
 <div align="center">
     <H2>MyTime Sample</H2>
     <BR><BR>
-     This is the time returned from the EJB: <%=s%>
+     The public time returned from the EJB: <%=s%>
+    <BR><BR>
+     The private time returned from the EJB: <%=private_s%>
     <BR><BR>
 </div>
 </body>

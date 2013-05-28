@@ -25,4 +25,9 @@ public class MyTimeBean implements MyTimeLocal {
         String s = new java.util.Date().toString();
         return s;
     }
+
+    public String getTimePrivate() {
+        String s = new java.util.Date().toString();
+        return s;
+    }
 }

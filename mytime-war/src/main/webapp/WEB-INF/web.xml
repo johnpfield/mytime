@@ -25,7 +25,7 @@
     </login-config>
 
     <security-role>
-        <role-name>EnmasseSuperUserRole</role-name>
+        <role-name>WebUserRole</role-name>
     </security-role>
 
     <security-constraint>
@@ -36,7 +36,7 @@
             <http-method>POST</http-method>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>EnmasseSuperUserRole</role-name>
+            <role-name>WebUserRole</role-name>
         </auth-constraint>
     </security-constraint>
     
@@ -49,7 +49,8 @@
     <ejb-local-ref>
         <ejb-ref-name>ejb/MyTimeBean</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
-        <local>org.apache.geronimo.samples.mytimepak.MyTimeLocal</local>
+<!--    <local-home>org.apache.geronimo.samples.mytimepak.MyTimeBean</local-home> -->
+		<local>org.apache.geronimo.samples.mytimepak.MyTimeLocal</local>
     </ejb-local-ref>
     
 </web-app>
