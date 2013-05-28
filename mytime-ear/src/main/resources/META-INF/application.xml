@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd" version="5">
+  <description>Geronimo Sample EAR for Stateless Session</description>
+  <display-name>Geronimo Sample EAR for Stateless Session</display-name>
+  <module>
+    <web>
+      <web-uri>mytime-war-3.0.0.war</web-uri>
+      <context-root>/mytime</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>mytime-ejb-3.0.0.jar</ejb>
+  </module>
+</application>

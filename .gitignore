@@ -1,0 +1,5 @@
+# Exclude target directories and temp files
+
+*~
+target/
+

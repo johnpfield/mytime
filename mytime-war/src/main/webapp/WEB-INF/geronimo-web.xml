@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-2.0"  xmlns:sec="http://geronimo.apache.org/xml/ns/security-2.0">
+
+	<dep:environment xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2">
+		<dep:moduleId>
+			<dep:artifactId>MyTimeWeb</dep:artifactId>
+			<dep:version>1.0</dep:version>
+			<dep:type>war</dep:type>
+		</dep:moduleId>
+		<dep:dependencies>
+			<dep:dependency>
+				<dep:groupId>console.realm</dep:groupId>
+				<dep:artifactId>FortressRealm</dep:artifactId>
+				<dep:version>1.0</dep:version>
+				<dep:type>car</dep:type>
+			</dep:dependency>
+		</dep:dependencies>
+	</dep:environment>
+
+	<context-root>/mytime</context-root>
+
+	<security-realm-name>FortressRealm</security-realm-name>
+
+	<sec:security>
+		<sec:default-principal>
+			<sec:principal name="anonymous"
+				class="org.apache.geronimo.security.realm.providers.GeronimoUserPrincipal" />
+		</sec:default-principal>
+		<sec:role-mappings>
+			<sec:role role-name="EnmasseSuperUserRole">
+			
+				<sec:principal name="EnmasseSuperUser" 
+					class="org.apache.geronimo.security.realm.providers.GeronimoGroupPrincipal" />
+				<sec:principal name="role1" 
+					class="org.apache.geronimo.security.realm.providers.GeronimoGroupPrincipal" />
+
+<!-- Support for this does not seem to be implemented....JPF 05/24/2013: 			
+				<sec:distinguished-name name="uid=johnfield,ou=People,dc=jts,dc=us"></sec:distinguished-name>	
+				<sec:distinguished-name name="cn=EnmasseSuperUser,ou=Roles,ou=RBAC,dc=jts,dc=us"></sec:distinguished-name>
+				<sec:distinguished-name name="cn=role1,ou=Roles,ou=RBAC,dc=jts,dc=us"></sec:distinguished-name>
+ -->				
+<!-- This works, but is not the preferred approach. 			
+ 				<sec:principal name="johnfield"
+					class="org.apache.geronimo.security.realm.providers.GeronimoUserPrincipal" />	
+ -->			
+ 				</sec:role>
+		</sec:role-mappings>
+	</sec:security>
+
+
+</web-app>
