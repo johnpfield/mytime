@@ -43,8 +43,7 @@ limitations under the License.
         Context context = new InitialContext();
         // MyTimeLocalHome is a reference to the EJB
         MyTimeLocal myTimeLocal = (MyTimeLocal) context.lookup("java:comp/env/ejb/MyTimeBean");
-        // So, just go ahead and call a method (in this case the only public method).
-
+        // go ahead and call a method (in this case the only private method).
         private_s = myTimeLocal.getTimePrivate(); // throw exception if caller is not authorized
     }
     catch (Exception e) {
