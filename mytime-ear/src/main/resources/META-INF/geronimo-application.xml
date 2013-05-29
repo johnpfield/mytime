@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-2.0"
-			 xmlns:sec="http://geronimo.apache.org/xml/ns/security-2.0">
-			 
-    <dep:environment xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2">
-        <dep:moduleId>
-            <dep:groupId>default</dep:groupId>
-            <dep:artifactId>mytime-ear-3.0.0</dep:artifactId>
-            <dep:version>1.0</dep:version>
-            <dep:type>car</dep:type>
-        </dep:moduleId>
-        <dep:dependencies>
-            <dep:dependency>
-                <dep:groupId>console.realm</dep:groupId>
-                <dep:artifactId>FortressRealm</dep:artifactId>
-                <dep:version>1.0</dep:version>
-                <dep:type>car</dep:type>
-            </dep:dependency>
-            <dep:dependency>
-                <dep:groupId>org.apache.geronimo.framework</dep:groupId> 
-                <dep:artifactId>j2ee-security</dep:artifactId>
-                <dep:type>car</dep:type>
-            </dep:dependency>
-        </dep:dependencies>
-    </dep:environment>
+	xmlns:sec="http://geronimo.apache.org/xml/ns/security-2.0"
+	xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2">
 
+	<dep:environment>
+		<dep:moduleId>
+			<dep:groupId>default</dep:groupId>
+			<dep:artifactId>mytime-ear-3.0.0</dep:artifactId>
+			<dep:version>1.0</dep:version>
+			<dep:type>car</dep:type>
+		</dep:moduleId>
+		<dep:dependencies>
+			<dep:dependency>
+				<dep:groupId>console.realm</dep:groupId>
+				<dep:artifactId>FortressRealm</dep:artifactId>
+				<dep:version>1.0</dep:version>
+				<dep:type>car</dep:type>
+			</dep:dependency>
+			<dep:dependency>
+				<dep:groupId>org.apache.geronimo.framework</dep:groupId>
+				<dep:artifactId>j2ee-security</dep:artifactId>
+				<dep:type>car</dep:type>
+			</dep:dependency>
+		</dep:dependencies>
+	</dep:environment>
+	
 	<sec:security>
 		<sec:role-mappings>
-
 			<sec:role role-name="WebUserRole">
 				<sec:principal name="EnmasseSuperUser"
 					class="org.apache.geronimo.security.realm.providers.GeronimoGroupPrincipal" />
@@ -41,9 +41,7 @@
 				<sec:principal name="role2"
 					class="org.apache.geronimo.security.realm.providers.GeronimoGroupPrincipal" />
 			</sec:role>
-
 		</sec:role-mappings>
-
 	</sec:security>
-
+			
 </application>
