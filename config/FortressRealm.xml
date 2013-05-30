@@ -1,0 +1,50 @@
+<module xmlns="http://geronimo.apache.org/xml/ns/deployment-1.2">
+    <environment>
+        <moduleId>
+            <groupId>console.realm</groupId>
+            <artifactId>FortressRealm</artifactId>
+            <version>1.0</version>
+            <type>car</type>
+        </moduleId>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.geronimo.framework</groupId>
+                <artifactId>j2ee-security</artifactId>
+                <type>car</type>
+            </dependency>
+        </dependencies>
+    </environment>
+    <gbean name="FortressRealm" class="org.apache.geronimo.security.realm.GenericSecurityRealm" xsi:type="dep:gbeanType" xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <attribute name="realmName">FortressRealm</attribute>
+        <attribute name="global">true</attribute>
+        <reference name="ServerInfo">
+            <name>ServerInfo</name>
+        </reference>
+        <xml-reference name="LoginModuleConfiguration">
+            <log:login-config xmlns:log="http://geronimo.apache.org/xml/ns/loginconfig-2.0">
+                <log:login-module control-flag="REQUIRED" wrap-principals="false">
+                    <log:login-domain-name>FortressRealm</log:login-domain-name>
+                    <log:login-module-class>org.apache.geronimo.security.realm.providers.LDAPLoginModule</log:login-module-class>
+                    <log:option name="connectionURL">ldap://10.0.0.22:389</log:option>
+                    <log:option name="connectionPassword">secret</log:option>
+                    <log:option name="roleBase">ou=Roles,ou=RBAC,dc=jts,dc=us</log:option>
+                    <log:option name="initialContextFactory">com.sun.jndi.ldap.LdapCtxFactory</log:option>
+                    <log:option name="roleName">cn</log:option>
+                    <log:option name="roleSearchMatching">roleOccupant={0}</log:option>
+                    <log:option name="roleSearchSubtree">true</log:option>
+                    <log:option name="userRoleName">roleName=cn={0}</log:option>
+                    <log:option name="authentication">simple</log:option>
+                    <log:option name="userSearchSubtree">true</log:option>
+                    <log:option name="connectionUsername">cn=Manager,dc=jts,dc=us</log:option>
+                    <log:option name="userBase">ou=People,dc=jts,dc=us</log:option>
+                    <log:option name="userSearchMatching">uid={0}</log:option>
+                </log:login-module>
+                <log:login-module control-flag="OPTIONAL" wrap-principals="false">
+                    <log:login-domain-name>FortressRealm-Audit</log:login-domain-name>
+                    <log:login-module-class>org.apache.geronimo.security.realm.providers.FileAuditLoginModule</log:login-module-class>
+                    <log:option name="file">var/log/login-attempts.log</log:option>
+                </log:login-module>
+            </log:login-config>
+        </xml-reference>
+    </gbean>
+</module>
