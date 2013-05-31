@@ -18,7 +18,7 @@ to invoke the EJB method "getTimePrivate()".  Users with the role "PublicBeanMet
 are able to invoke a different EJB method, "getTime()".  (Both methods will return the current time).
 
 This code is based on the "mytime" sample stateless session bean application originally provided in 
-the `/samples/javaee5` subdirectory, within the Geronimo 3.0 distribution.  We have slightly modified that example  
+the `/samples/javaee5` subdirectory, within the Apache Geronimo 3.0 distribution.  We have slightly modified that example 
 for this use, mainly by adding one additional EJB method, and supplying the necessary deployment descriptors to 
 invoke the J2EE container managed security. 
 
@@ -32,10 +32,10 @@ invoke the J2EE container managed security.
 
 ## Quick Start
 
-As prerequisites, you'll need to have Geronimo 3.x or another standards-compliant J2EE container in which to deploy the EAR file.
+As prerequisites, you'll need to have Apache Geronimo 3.x or another standards-compliant J2EE container in which to deploy the EAR file.
 You can download Geronimo from [here.](http://geronimo.apache.org/downloads.html)
-You'll also need to have an LDAP directory available.  This will be used as the back end authority for the custom authentication realm.  
-The use of OpenLDAP or [IAMfortress OpenLDAP](http://http://iamfortress.org/download) is recommended. 
+You'll also need to have an LDAP directory available.  This will be used as the back end authority for the custom authentication realm. 
+The use of OpenLDAP or [IAMfortress OpenLDAP](http://iamfortress.org/download) is recommended. 
 
 If this works you are in business:
 
@@ -72,7 +72,7 @@ You can log in using any username (uid) and password from your LDAP directory.
 
 ### Discussion
 
-You can log in with any user that is present in the LDAP OU=People DIT subtree.   However, if the user does not have the appropriate group memberships in LDAP then they will not have authorization to access the page, or execute the EJB method calls needed to render the text on the page.  
+You can log in with any user that is present in the LDAP OU=People DIT subtree.   However, if the user does not have the appropriate group memberships in LDAP then they will not have authorization to access the page, or execute the EJB method calls needed to render the text on the page. 
 
 * If your authentication fails (i.e. bad password), then you will get a 401 Unauthorized status and will be prompted again for credentials.
 
@@ -104,9 +104,9 @@ The mapping of the abstract role `WebUserRole` to an `actual` LDAP group is done
 
 In that file, we see that `WebUserRole` is mapped to `EnmasseSuperUser` ...this is done for absolutely no compelling reason.  This was just a random choice of a role available in Fortress.  Feel free to try something else.
 
-The mapping of the abstract roles `PublicBeanMethodUserRole` and `PrivateBeanMethodUserRole` to an `actual` LDAP group is also done in the file `mytime/mytime-ear/src/main/resources/META-INF/geronimo-application.xml`.
+The mapping of the abstract roles `PublicBeanMethodUserRole` and `PrivateBeanMethodUserRole` to an `actual` LDAP group is also done in the file `mytime/mytime-ear/src/main/resources/META-INF/geronimo-application.xml`. We have mapped the abstract role for the private method to the actual LDAP group called `role1', and the abstract role for the public method to the actual LDAP group called 'role2'.  Again, this was an arbitrary choice.  You can expermiment with other role-to-group mappings.
 
-Notice that the stuff that is enterprise-specific is done in one container-specific deployment descriptor, in the case of geronimo 3 this is the geronimo-application.xml.  We have secured both the Web tier resources and the EJB tier resources in one file, an artifact that is owned by the enterprise deployer.  
+Notice that the stuff that is enterprise-specific is done in one container-specific deployment descriptor, in the case of Geronimo 3 this is the geronimo-application.xml.  We have secured both the Web tier resources and the EJB tier resources in one file, an artifact that is owned by the enterprise deployer.  
 
 Conversely, the stuff that is fixed at application design time (the mapping of abstract roles to pages and bean methods) is done in the web.xml and ejb-jar.xml files, respectively.  These files are owned by the application supplier, and would not change on a per-deployment basis.
 As noted, the geronimo-application.xml file would be customized by the enterprise deployment team.
