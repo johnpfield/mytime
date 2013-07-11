@@ -22,6 +22,9 @@ the `/samples/javaee5` subdirectory, within the Apache Geronimo 3.0 distribution
 for this use, mainly by adding one additional EJB method, and supplying the necessary deployment descriptors to 
 invoke the J2EE container managed security. 
 
+This version of the MyTime deployment has a dependency on the Pivotal Security Interceptor.  Prior to 
+deploying the MyTime EAR, you must first do a build and install of the psi-jee-1.0.0.jar into the repository 
+of your Geronimo container.
 
 ## Co-ordinates
 
@@ -36,6 +39,8 @@ As prerequisites, you'll need to have Apache Geronimo 3.x or another standards-c
 You can download Geronimo from [here.](http://geronimo.apache.org/downloads.html)
 You'll also need to have an LDAP directory available.  This will be used as the back end authority for the custom authentication realm. 
 The use of OpenLDAP or [IAMfortress OpenLDAP](http://iamfortress.org/download) is recommended. 
+Finally, you will need the Pivotal Security Interceptor.  This project can be downloaded from [here.](https://github.com/johnpfield/psi-jee) Follow 
+the procedure provided on that page to build the interceptor and upload it to the Geronimo repository, prior to deploying the MyTime application.
 
 If this works you are in business:
 
@@ -50,7 +55,8 @@ This will create the EAR file in the mytime-ear target directory, which you can 
 1. Install and run Geronimo as per [these instructions.](http://geronimo.apache.org/GMOxDOC30/quick-start-apache-geronimo-for-the-impatient.html)
 2. Install and run IAMfortress OpenLAP as per [these instructions.](http://www.jts.us/iamfortress/guides/README-QUICKSTART.html) 
 3. In the Geronimo Management Console pages, add a new Security Realm.  Specific details are available in file FortressRealm.xml, which can be found in the `mytime/config` subdirectory.
- 
+4. Build the Pivotal Security Interceptor, and install it into the Geronimo Repository, as per [these instructions].(https://github.com/johnpfield/psi-jee#quick-start)
+
 ### Build and Deploy
 
 If this works you are in business:
@@ -106,9 +112,19 @@ In that file, we see that `WebUserRole` is mapped to `EnmasseSuperUser` ...this 
 
 The mapping of the abstract roles `PublicBeanMethodUserRole` and `PrivateBeanMethodUserRole` to an `actual` LDAP group is also done in the file `mytime/mytime-ear/src/main/resources/META-INF/geronimo-application.xml`. We have mapped the abstract role for the private method to the actual LDAP group called `role1', and the abstract role for the public method to the actual LDAP group called 'role2'.  Again, this was an arbitrary choice.  You can expermiment with other role-to-group mappings.
 
-Notice that the stuff that is enterprise-specific is done in one container-specific deployment descriptor, in the case of Geronimo 3 this is the geronimo-application.xml.  We have secured both the Web tier resources and the EJB tier resources in one file, an artifact that is owned by the enterprise deployer.  
+Notice that the stuff that is enterprise-specific is done in one container-specific deployment descriptor, in the case of Geronimo 3 this is the geronimo-application.xml.  We have secured both the Web tier resources and the EJB tier resources in one file, an artifact that is owned by the enterprise deployer. 
 
 Conversely, the stuff that is fixed at application design time (the mapping of abstract roles to pages and bean methods) is done in the web.xml and ejb-jar.xml files, respectively.  These files are owned by the application supplier, and would not change on a per-deployment basis.
 As noted, the geronimo-application.xml file would be customized by the enterprise deployment team.
 
+### The EJB 3.0 Interceptor
 
+EJB 3.0 includes the capability to use Aspect Oriented Programming techniques in your application.
+
+Specifically, EJB 3.0 supports the use of Interceptors, which enable you to intercept a call to an EJB method, in order to inject (at runtime) additional code that implements logic for cross-cutting concerns. In this project, we've included a dependency on an interceptor component we call the Pivotal Security Interceptor (PSI-JEE).  Full details for the PSI are available [here.](https://github.com/johnpfield/psi-jee)
+
+
+If for some reason you do not want to use the interceptor, you can simply remove the dependency from the MyTime EJB deployment descriptor prior to deployment.  It is recommended that you first create a git branch, and then edit two files:  the mytime-ejb/src/main/resources/META-INF/ejb-jar.xml and the mytime-ejb/pom.xml to remove this dependency. The specific XML elements you would be looking to remove are the same ones identified in the [Quick Start](https://github.com/johnpfield/psi-jee#quick-start) discussion of that project page.
+ 
+
+ 
