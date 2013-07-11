@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-2.0"
-	xmlns:sec="http://geronimo.apache.org/xml/ns/security-2.0"
+	xmlns:sec="http://geronimo.apache.org/xml/ns/security-2.0" 
 	xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2">
 
 	<dep:environment>
@@ -24,8 +24,8 @@
 			</dep:dependency>
 		</dep:dependencies>
 	</dep:environment>
-	
-	<sec:security>
+
+	<sec:security use-context-handler="true">
 		<sec:role-mappings>
 			<sec:role role-name="WebUserRole">
 				<sec:principal name="EnmasseSuperUser"
@@ -43,5 +43,5 @@
 			</sec:role>
 		</sec:role-mappings>
 	</sec:security>
-			
+
 </application>

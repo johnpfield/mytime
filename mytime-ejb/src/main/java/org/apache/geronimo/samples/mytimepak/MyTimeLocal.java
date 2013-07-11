@@ -18,7 +18,7 @@
 package org.apache.geronimo.samples.mytimepak;
 
 public interface MyTimeLocal {
-	public java.lang.String getTime();
-	public java.lang.String getTimePrivate();
+	public java.lang.String getTime(String dummy);
+	public java.lang.String getTimePrivate(String dummy);
     
 }

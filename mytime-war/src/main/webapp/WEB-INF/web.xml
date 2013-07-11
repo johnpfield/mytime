@@ -15,10 +15,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  
 						http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd"
 	version="2.5">
-
+	
 
 	<display-name>Secured MyTimeWeb</display-name>
-
 
 	<login-config>
 		<auth-method>BASIC</auth-method>

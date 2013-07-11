@@ -1,0 +1,42 @@
+
+RELEASE NOTES
+---------------
+
+John Field
+07/11/2013
+
+Changes included in this version:
+
+1.  Successfully deploying and starting this version of the MyTime application requires that the 
+Pivotal Security Interceptor be installed in the target Apache Geronimo container's repository.  
+This should be done prior to deployment of the EAR.  Detailed instructions for how to build the
+interceptor and install it into the container repository can be found in the README.md available 
+on this page:  https://github.com/johnpfield/psi-jee
+
+2. Added the necessary markup to the ejb-jar.xml deployment descriptor in order to configure the 
+Pivotal Security Interceptor on the MyTimeBean EJB interface. 
+
+3. Added an argument of type String to each of the methods included in the public 
+interface MyTimeLocal.  This argument can be any arbitrary String and has no effect on the 
+processing, except that it is echoed back to the user's browser.  The reason for including
+it is that it can be examined and logged by the associated EJB 3 interceptor.
+
+4.  Consistent with the above, a change was made to the file /WEB-INF/index.jsp to pass an 
+arbitrary String argument whenever invoking the MyTimeBean's EJB interface methods.  
+
+5. Added the Pivotal Security Interceptor as a Maven dependency in the POM file, /mytime-ejb/pom.xml.
+There is a new dependency for the PSI jar, as well as a new <plugin> element referenced within the 
+<build>/<plugins> element.  The maven-jar-plugin, when used with the configuration shown, ensures that 
+the psi-jee-1.0.0.jar will be included on Classpath: entry within the MANIFEST.MF file that is 
+bundled into the EJB jar file that is produced by the build.
+
+6. Added a new Maven profile, which can be invoked via -P pivotal, i.e. run the Maven build using:
+
+   $ mvn clean install -P pivotal
+
+This will build the EAR file, but bypasses building the Geronimo plug-in artifacts.  
+In the previous release we used the profile -P no-plugin.  These are currently the same.  
+However, anticipating that we may have additional build specializations going forward, 
+a dedicated profile was introduced. 
+
+ 

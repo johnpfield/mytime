@@ -27,7 +27,13 @@
 		</session>
 	</enterprise-beans>
 
-
+ 	<interceptors>
+        <interceptor>
+            <interceptor-class>
+                com.gopivotal.security.EjbPolicyEnforcement
+            </interceptor-class>
+        </interceptor>
+    </interceptors>
 
 	<assembly-descriptor>
 		<security-role>
@@ -51,6 +57,15 @@
 				<method-name>getTime</method-name>
 			</method>
 		</method-permission>
+    
+		
+		<interceptor-binding>
+            <ejb-name>ejb/MyTimeBean</ejb-name>
+    		<interceptor-class>com.gopivotal.security.EjbPolicyEnforcement</interceptor-class>
+            <method>
+               <method-name>getTimePrivate</method-name>
+            </method>    
+        </interceptor-binding>
 
 	</assembly-descriptor>
 </ejb-jar>

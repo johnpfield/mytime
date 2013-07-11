@@ -22,36 +22,13 @@
     xmlns:name="http://geronimo.apache.org/xml/ns/naming-1.2" xmlns:pers="http://java.sun.com/xml/ns/persistence"
     xmlns:pkgen="http://openejb.apache.org/xml/ns/pkgen-2.1" xmlns:sec="http://geronimo.apache.org/xml/ns/security-2.0"
     xmlns:web="http://geronimo.apache.org/xml/ns/j2ee/web-2.0.1">
-    <dep:environment>
-        <dep:moduleId>
-            <dep:groupId>org.apache.geronimo.samples</dep:groupId>
-            <dep:artifactId>mytime-ejb</dep:artifactId>
-            <dep:version>3.0.0</dep:version>
-            <dep:type>car</dep:type>
-        </dep:moduleId>
-    </dep:environment>
 
-
-	<!-- <sec:security>
-		<sec:role-mappings>
-			<sec:role role-name="EnmasseSuperUserRole">
-
-				<sec:principal name="EnmasseSuperUser"
-					class="org.apache.geronimo.security.realm.providers.GeronimoGroupPrincipal" />
-				<sec:principal name="role1"
-					class="org.apache.geronimo.security.realm.providers.GeronimoGroupPrincipal" />
-
-				Support for this does not seem to be implemented....JPF 05/24/2013: 
-					<sec:distinguished-name name="uid=johnfield,ou=People,dc=jts,dc=us"></sec:distinguished-name> 
-					<sec:distinguished-name name="cn=EnmasseSuperUser,ou=Roles,ou=RBAC,dc=jts,dc=us"></sec:distinguished-name> 
-					<sec:distinguished-name name="cn=role1,ou=Roles,ou=RBAC,dc=jts,dc=us"></sec:distinguished-name>
-
-				This works, but is not the preferred approach. <sec:principal name="johnfield" 
-					class="org.apache.geronimo.security.realm.providers.GeronimoUserPrincipal" 
-					/>
-					
-			</sec:role>
-		</sec:role-mappings>
-	</sec:security> -->
+	<dep:environment>
+		<dep:moduleId>
+			<dep:groupId>org.apache.geronimo.samples</dep:groupId>
+			<dep:artifactId>mytime-ejb</dep:artifactId>
+			<dep:type>car</dep:type>
+		</dep:moduleId>
+	</dep:environment>
     
 </openejb-jar>

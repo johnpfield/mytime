@@ -17,17 +17,36 @@
 package org.apache.geronimo.samples.mytimepak;
 
 import javax.ejb.Stateless;
+import javax.ejb.EnterpriseBean;
+import javax.ejb.SessionContext;
+import javax.annotation.Resource;
+
 
 @Stateless
-public class MyTimeBean implements MyTimeLocal {
+public class MyTimeBean implements EnterpriseBean, MyTimeLocal {
 
-    public String getTime() {
+	@Resource
+	private SessionContext ctx;
+
+
+	public SessionContext getSessionContext() {
+		return this.ctx;
+	}
+	
+
+	public void setSessionContext(SessionContext aCtx) {
+		this.ctx = aCtx;
+	}
+	
+    public String getTime(String dummy) {
         String s = new java.util.Date().toString();
-        return s;
+        String s2 = s.concat(dummy);
+        return s2;
     }
 
-    public String getTimePrivate() {
+    public String getTimePrivate(String dummy) {
         String s = new java.util.Date().toString();
-        return s;
+        String s2 = s.concat(dummy);
+        return s2;
     }
 }

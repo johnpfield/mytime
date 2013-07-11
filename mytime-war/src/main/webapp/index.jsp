@@ -21,6 +21,8 @@ limitations under the License.
 <body>
 <%
     String s = "-"; // Just declare a string
+	String s2 = " Go Bruins!";
+	String s3 = " Go Blackhawks!";
 
 	try {
         // This creates a context, it can be used to lookup EJBs. 
@@ -28,7 +30,7 @@ limitations under the License.
         // MyTimeLocalHome is a reference to the EJB.
         MyTimeLocal myTimeLocal = (MyTimeLocal) context.lookup("java:comp/env/ejb/MyTimeBean");
         // So, just go ahead and call a method (in this case the only public method).
-        s = myTimeLocal.getTime();
+        s = myTimeLocal.getTime(s2);
     }
     catch (Exception e) {
         s = e.toString();
@@ -44,7 +46,7 @@ limitations under the License.
         // MyTimeLocalHome is a reference to the EJB
         MyTimeLocal myTimeLocal = (MyTimeLocal) context.lookup("java:comp/env/ejb/MyTimeBean");
         // go ahead and call a method (in this case the only private method).
-        private_s = myTimeLocal.getTimePrivate(); // throw exception if caller is not authorized
+        private_s = myTimeLocal.getTimePrivate(s3); // throw exception if caller is not authorized
     }
     catch (Exception e) {
         private_s = e.toString();

@@ -79,5 +79,20 @@
                 <module>mytime-tomcat</module>
             </modules>         
         </profile>
+        <profile>
+            <id>pivotal</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>        
+                <property>
+                    <name>buildPlugin</name>
+                    <value>true</value>
+                </property>        
+            </activation>
+            <modules>
+                <module>mytime-ejb</module>
+                <module>mytime-war</module>
+                <module>mytime-ear</module>
+            </modules>
+        </profile>
     </profiles>
 </project>
