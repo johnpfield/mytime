@@ -22,8 +22,8 @@ the `/samples/javaee5` subdirectory, within the Apache Geronimo 3.0 distribution
 for this use, mainly by adding one additional EJB method, and supplying the necessary deployment descriptors to 
 invoke the J2EE container managed security. 
 
-This version of the MyTime deployment has a dependency on the Pivotal Security Interceptor.  Prior to 
-deploying the MyTime EAR, you must first do a build and install of the psi-jee-1.0.0.jar into the repository 
+This version of the mytime deployment has a dependency on the Pivotal Security Interceptor.  Prior to 
+deploying the mytime EAR, you must first do a build and install of the psi-jee-1.0.0.jar into the repository 
 of your Geronimo container.
 
 ## Co-ordinates
@@ -55,7 +55,7 @@ This will create the EAR file in the mytime-ear target directory, which you can 
 1. Install and run Geronimo as per [these instructions.](http://geronimo.apache.org/GMOxDOC30/quick-start-apache-geronimo-for-the-impatient.html)
 2. Install and run IAMfortress OpenLAP as per [these instructions.](http://www.jts.us/iamfortress/guides/README-QUICKSTART.html) 
 3. In the Geronimo Management Console pages, add a new Security Realm.  Specific details are available in file FortressRealm.xml, which can be found in the `mytime/config` subdirectory.
-4. Build the Pivotal Security Interceptor, and install it into the Geronimo Repository, as per [these instructions].(https://github.com/johnpfield/psi-jee#quick-start)
+4. Build the Pivotal Security Interceptor, and install it into the Geronimo Repository, as per [these instructions.](https://github.com/johnpfield/psi-jee#quick-start)
 
 ### Build and Deploy
 
@@ -124,7 +124,7 @@ EJB 3.0 includes the capability to use Aspect Oriented Programming techniques in
 Specifically, EJB 3.0 supports the use of Interceptors, which enable you to intercept a call to an EJB method, in order to inject (at runtime) additional code that implements logic for cross-cutting concerns. In this project, we've included a dependency on an interceptor component we call the Pivotal Security Interceptor (PSI-JEE).  Full details for the PSI are available [here.](https://github.com/johnpfield/psi-jee)
 
 
-If for some reason you do not want to use the interceptor, you can simply remove the dependency from the MyTime EJB deployment descriptor prior to deployment.  It is recommended that you first create a git branch, and then edit two files:  the mytime-ejb/src/main/resources/META-INF/ejb-jar.xml and the mytime-ejb/pom.xml to remove this dependency. The specific XML elements you would be looking to remove are the same ones identified in the [Quick Start](https://github.com/johnpfield/psi-jee#quick-start) discussion of that project page.
+If for some reason you do not want to use the interceptor, you can simply remove the dependency from the mytime EJB deployment descriptor prior to deployment.  It is recommended that you first create a git branch, and then edit two files:  the mytime-ejb/src/main/resources/META-INF/ejb-jar.xml and the mytime-ejb/pom.xml to remove this dependency. The specific XML elements you would be looking to remove are the same ones identified in the [Quick Start](https://github.com/johnpfield/psi-jee#quick-start) discussion of that project page.
  
 
  
